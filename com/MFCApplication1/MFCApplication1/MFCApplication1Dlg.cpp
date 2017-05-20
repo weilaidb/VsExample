@@ -126,9 +126,12 @@ BOOL CMFCApplication1Dlg::OnInitDialog()
 
 
 	CString str1[] = { _T("300"), _T("600"), _T("1200"), _T("2400"), _T("4800"), _T("9600"),
-		_T("19200"), _T("38400"), _T("43000"), _T("56000"), _T("57600"), _T("115200") };
+		_T("19200"), _T("38400"), _T("43000"), _T("56000"), _T("57600"), _T("115200"),
+		_T("128000"), _T("256000"), _T("230400")};
 
-	for (int i = 0; i<12; i++)
+#define ARRAY_SIZE(A) (unsigned int )(sizeof(A)/sizeof(A[0]))
+
+	for (int i = 0; i<ARRAY_SIZE(str1); i++)
 	{
 		//int judge_tf = m_Comb2.AddString(str1[i]);
 		m_Comb2.InsertString(i, str1[i]);
@@ -136,7 +139,7 @@ BOOL CMFCApplication1Dlg::OnInitDialog()
 			//MessageBox(_T("build baud error!"));
 
 	}
-	m_Comb2.SetCurSel(0);//预置波特率为"9600" 
+	m_Comb2.SetCurSel(11);//预置波特率为"9600" 
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -171,7 +174,8 @@ void CMFCApplication1Dlg::OnPaint()
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
 		GetClientRect(&rect);
-		int x = (rect.Width() - cxIcon + 1) / 2;
+		int offset = 0;
+		int x = (rect.Width() + offset  - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
 		// 绘制图标
@@ -206,7 +210,7 @@ void CMFCApplication1Dlg::OnBnClickedButtonOpen()
 		m_Comb2.GetLBText(m_Comb2.GetCurSel(), str1);//取得所选的字符串，并存放在str1里面
 		str1 = str1 + ',' + 'n' + ',' + '8' + ',' + '1';//很关键
 
-		m_Mscom.put_CommPort((m_Comb1.GetCurSel() + 1));//选择串口
+		m_Mscom.put_CommPort((m_Comb1.GetCurSel()));//选择串口
 		m_Mscom.put_InputMode(1);//设置输入方式为二进制
 		m_Mscom.put_Settings(str1);//波特率为（）无校验，8位数据位，1个停止位
 		m_Mscom.put_InputLen(1024);//设置当前接受去数据长度为1024
