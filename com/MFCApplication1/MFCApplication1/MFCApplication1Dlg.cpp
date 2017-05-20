@@ -6,11 +6,14 @@
 #include "MFCApplication1.h"
 #include "MFCApplication1Dlg.h"
 #include "afxdialogex.h"
+#include <iostream>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
+
+using namespace std;
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
@@ -111,9 +114,9 @@ BOOL CMFCApplication1Dlg::OnInitDialog()
 	// TODO:  在此添加额外的初始化代码
 	CString str;
 	int i;
-	for (i = 0; i<15; i++)
+	for (i = 0; i<=25; i++)
 	{
-		str.Format(_T("com %d"), i + 1);
+		str.Format(_T("com %d"), i /*+ 1*/);
 		m_Comb1.InsertString(i, str);
 	}
 
@@ -123,13 +126,14 @@ BOOL CMFCApplication1Dlg::OnInitDialog()
 
 
 	CString str1[] = { _T("300"), _T("600"), _T("1200"), _T("2400"), _T("4800"), _T("9600"),
-			_T("19200"), _T("38400"), _T("43000"), _T("56000"), _T("57600"), _T("115200") };
+		_T("19200"), _T("38400"), _T("43000"), _T("56000"), _T("57600"), _T("115200") };
 
 	for (int i = 0; i<12; i++)
 	{
-		int judge_tf = m_Comb2.AddString(str1[i]);
-		if ((judge_tf == CB_ERR) || (judge_tf == CB_ERRSPACE))
-			MessageBox(_T("build baud error!"));
+		//int judge_tf = m_Comb2.AddString(str1[i]);
+		m_Comb2.InsertString(i, str1[i]);
+		//if ((judge_tf == CB_ERR) || (judge_tf == CB_ERRSPACE))
+			//MessageBox(_T("build baud error!"));
 
 	}
 	m_Comb2.SetCurSel(0);//预置波特率为"9600" 
@@ -259,6 +263,7 @@ void CMFCApplication1Dlg::OnBnClickedButtonExit()
 
 void CMFCApplication1Dlg::OnEnChangeSend()
 {
+	cout << "input text changed" << endl;
 	// TODO:  在此添加控件通知处理程序代码
 	//m_EditReceive = _T("");//把接收编辑框发送空格符
 	//UpdateData(false);//更新数据

@@ -124,10 +124,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="MFCApplication1.rc" />
+    <ResourceCompile Include="MFCApplication1.rc">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\MFCApplication1.rc2" />
+    <None Include="res\MFCApplication1.rc2">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MFCApplication1.ico" />
