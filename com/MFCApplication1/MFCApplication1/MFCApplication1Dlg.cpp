@@ -139,7 +139,7 @@ BOOL CMFCApplication1Dlg::OnInitDialog()
 			//MessageBox(_T("build baud error!"));
 
 	}
-	m_Comb2.SetCurSel(11);//预置波特率为"9600" 
+	m_Comb2.SetCurSel(11);//预置波特率为"115200" 
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
